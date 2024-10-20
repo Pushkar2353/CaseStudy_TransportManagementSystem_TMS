@@ -167,6 +167,7 @@ namespace TMS
 
         static void BookTrip(TransportManagementServiceImpl service)
         {
+            DisplayExistingRoutes(service); 
             DisplayExistingTrips(service);
             DisplayExistingPassengers(service);
             Console.Write("Enter Trip ID: ");
