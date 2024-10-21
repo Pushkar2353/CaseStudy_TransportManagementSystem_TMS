@@ -34,13 +34,11 @@ namespace TMS.Dao
         }
             catch (SqlException ex)
             {
-                // Handle SQL exception (e.g., log it)
                 Console.WriteLine($"SQL Error: {ex.Message}");
                 return false;
             }
             catch (ApplicationException ex)
             {
-                // Handle any other exceptions
                 Console.WriteLine($"Error: {ex.Message}");
                 return false;
             }
@@ -68,13 +66,11 @@ namespace TMS.Dao
         }
             catch (SqlException ex)
             {
-                // Handle SQL exception (e.g., log it)
                 Console.WriteLine($"SQL Error: {ex.Message}");
                 return false;
             }
             catch (ApplicationException ex)
             {
-                // Handle any other exceptions
                 Console.WriteLine($"Error: {ex.Message}");
                 return false;
             }
@@ -98,13 +94,11 @@ namespace TMS.Dao
         }
             catch (SqlException ex)
             {
-                // Handle SQL exception (e.g., log it)
                 Console.WriteLine($"SQL Error: {ex.Message}");
                 return false;
             }
             catch (ApplicationException ex)
             {
-                // Handle any other exceptions
                 Console.WriteLine($"Error: {ex.Message}");
                 return false;
             }
@@ -132,13 +126,11 @@ namespace TMS.Dao
         }
             catch (SqlException ex)
             {
-                // Handle SQL exception (e.g., log it)
                 Console.WriteLine($"SQL Error: {ex.Message}");
                 return false;
             }
             catch (ApplicationException ex)
             {
-                // Handle any other exceptions
                 Console.WriteLine($"Error: {ex.Message}");
                 return false;
             }
@@ -162,13 +154,11 @@ namespace TMS.Dao
         }
             catch (SqlException ex)
             {
-                // Handle SQL exception (e.g., log it)
                 Console.WriteLine($"SQL Error: {ex.Message}");
                 return false;
             }
             catch (ApplicationException ex)
             {
-                // Handle any other exceptions
                 Console.WriteLine($"Error: {ex.Message}");
                 return false;
             }
@@ -195,13 +185,11 @@ namespace TMS.Dao
         }
             catch (SqlException ex)
             {
-                // Handle SQL exception (e.g., log it)
                 Console.WriteLine($"SQL Error: {ex.Message}");
                 return false;
             }
             catch (ApplicationException ex)
             {
-                // Handle any other exceptions
                 Console.WriteLine($"Error: {ex.Message}");
                 return false;
             }
@@ -221,18 +209,16 @@ namespace TMS.Dao
                     cmd.Parameters.AddWithValue("@BookingID", bookingId);
 
                     int result = cmd.ExecuteNonQuery();
-                    return result > 0; // Returns true if one or more rows were affected
+                    return result > 0;
                 }
             }
             catch (SqlException ex)
             {
-                // Handle SQL exception (e.g., log it)
                 Console.WriteLine($"SQL Error: {ex.Message}");
                 return false;
             }
             catch (ApplicationException ex)
             {
-                // Handle any other exceptions
                 Console.WriteLine($"Error: {ex.Message}");
                 return false;
             }
@@ -251,21 +237,19 @@ namespace TMS.Dao
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@TripID", tripId);
                     cmd.Parameters.AddWithValue("@DriverID", driverId);
-                    cmd.Parameters.AddWithValue("@AllocationDate", DateTime.Now); // Set the current date and time
+                    cmd.Parameters.AddWithValue("@AllocationDate", DateTime.Now);
 
                     int result = cmd.ExecuteNonQuery();
-                    return result > 0; // Returns true if the insert was successful
+                    return result > 0;
                 }
             }
             catch (SqlException ex)
             {
-                // Handle SQL exception (e.g., log it)
                 Console.WriteLine($"SQL Error: {ex.Message}");
                 return false;
             }
             catch (ApplicationException ex)
             {
-                // Handle any other exceptions
                 Console.WriteLine($"Error: {ex.Message}");
                 return false;
             }
@@ -289,13 +273,11 @@ namespace TMS.Dao
         }
             catch (SqlException ex)
             {
-                // Handle SQL exception (e.g., log it)
                 Console.WriteLine($"SQL Error: {ex.Message}");
                 return false;
             }
             catch (ApplicationException ex)
             {
-                // Handle any other exceptions
                 Console.WriteLine($"Error: {ex.Message}");
                 return false;
             }
@@ -393,7 +375,7 @@ namespace TMS.Dao
         {
             using (SqlConnection conn = DBConnUtil.GetConnection())
             {
-                conn.Open(); // Explicitly open the connection
+                conn.Open();
                 string query = "SELECT * FROM Vehicle WHERE VehicleID = @VehicleID";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -405,9 +387,9 @@ namespace TMS.Dao
                         {
                             return new Vehicle
                             {
-                                VehicleID = Convert.ToInt32(reader["VehicleID"]), // Ensure the ID is read correctly
+                                VehicleID = Convert.ToInt32(reader["VehicleID"]),
                                 Model = reader["Model"].ToString(),
-                                Capacity = Convert.ToInt32(reader["Capacity"]), // Use Convert.ToInt32 here
+                                Capacity = Convert.ToInt32(reader["Capacity"]),
                                 Type = reader["Type"].ToString(),
                                 Status = reader["Status"].ToString()
                             };
@@ -426,13 +408,13 @@ namespace TMS.Dao
 
             using (SqlConnection conn = DBConnUtil.GetConnection())
             {
-                conn.Open(); // Ensure the connection is opened
+                conn.Open();
 
                 string query = "SELECT * FROM Booking WHERE BookingID = @BookingID";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@BookingID", bookingId);
 
-                SqlDataReader reader = cmd.ExecuteReader(); // ExecuteReader requires the connection to be open
+                SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
                     booking = new Booking
@@ -518,7 +500,7 @@ namespace TMS.Dao
             using (SqlConnection conn = DBConnUtil.GetConnection())
             {
                 conn.Open();
-                string query = "SELECT RouteID, StartDestination, EndDestination, Distance FROM Route"; // Make sure column names match the database
+                string query = "SELECT RouteID, StartDestination, EndDestination, Distance FROM Route";
                 SqlCommand cmd = new SqlCommand(query, conn);
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
@@ -530,7 +512,7 @@ namespace TMS.Dao
                             RouteID = reader.GetInt32(0),
                             StartDestination = reader.GetString(1),
                             EndDestination = reader.GetString(2),
-                            Distance = reader.GetDecimal(3) // Change to GetDecimal since distance is a decimal in the class
+                            Distance = reader.GetDecimal(3)
                         };
                         routes.Add(route);
                     }
@@ -573,7 +555,7 @@ namespace TMS.Dao
             using (SqlConnection conn = DBConnUtil.GetConnection())
             {
                 conn.Open();
-                string query = "SELECT PassengerID, FirstName, Gender, Age, Email, PhoneNumber FROM Passenger"; // Adjust the query based on your actual table
+                string query = "SELECT PassengerID, FirstName, Gender, Age, Email, PhoneNumber FROM Passenger";
                 SqlCommand cmd = new SqlCommand(query, conn);
 
                 using (SqlDataReader reader = cmd.ExecuteReader())

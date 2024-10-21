@@ -23,7 +23,9 @@ namespace TMS
 
             while (!exit)
             {
-                Console.WriteLine("\n--- Transport Management System ---");
+                Console.WriteLine("\n--- Welcome to Transport Management App ---");
+                Console.WriteLine("\n-------------------------------------------");
+                Console.WriteLine("");
                 Console.WriteLine("1. Add Vehicle");
                 Console.WriteLine("2. Update Vehicle");
                 Console.WriteLine("3. Delete Vehicle");
@@ -37,6 +39,8 @@ namespace TMS
                 Console.WriteLine("11. Get Bookings By Trip");
                 Console.WriteLine("12. Get Available Drivers");
                 Console.WriteLine("13. Exit");
+                Console.WriteLine("");
+                Console.WriteLine("\n-------------------------------------------");
                 Console.Write("Choose an option: ");
                 int choice = Convert.ToInt32(Console.ReadLine());
 
@@ -157,7 +161,7 @@ namespace TMS
 
         static void CancelTrip(TransportManagementServiceImpl service)
         {
-            DisplayExistingTrips(service);  // Display existing trips
+            DisplayExistingTrips(service);
 
             Console.Write("Enter Trip ID: ");
             int tripId = Convert.ToInt32(Console.ReadLine());
@@ -184,7 +188,7 @@ namespace TMS
 
         static void CancelBooking(TransportManagementServiceImpl service)
         {
-            DisplayExistingBookings(service);  // Display existing bookings
+            DisplayExistingBookings(service);
 
             Console.Write("Enter Booking ID: ");
             int bookingId = Convert.ToInt32(Console.ReadLine());
@@ -269,7 +273,7 @@ namespace TMS
                 Console.WriteLine("No available drivers.");
             }
         }
-        // Methods to display existing data
+
         static void DisplayExistingVehicles(TransportManagementServiceImpl service)
         {
             Console.WriteLine("\nExisting Vehicles:");
@@ -340,7 +344,7 @@ namespace TMS
         static void DisplayExistingBookings(TransportManagementServiceImpl service)
         {
             Console.WriteLine("\nExisting Bookings:");
-            List<Booking> bookings = service.GetAllBookings();  // Assuming you have this method
+            List<Booking> bookings = service.GetAllBookings();
             if (bookings.Count > 0)
             {
                 foreach (var booking in bookings)
@@ -356,7 +360,7 @@ namespace TMS
         static void DisplayExistingPassengers(TransportManagementServiceImpl service)
         {
             Console.WriteLine("\nExisting Passengers:");
-            List<Passenger> passengers = service.GetAllPassengers();  // Assuming you have this method
+            List<Passenger> passengers = service.GetAllPassengers();
             if (passengers.Count > 0)
             {
                 foreach (var passenger in passengers)
